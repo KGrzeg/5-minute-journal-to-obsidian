@@ -5,6 +5,10 @@ import { EOL } from 'os';
 import yargs from 'yargs';
 import { hideBin } from 'yargs/helpers';
 
+const section_blacklist = [
+  'user'
+];
+
 const argv = yargs(hideBin(process.argv))
   .option('input_file', {
     alias: 'i',
@@ -27,7 +31,7 @@ function getPharse(term) {
     "gratitude": "I am grateful for",
     "greatness": "What will I do to make today great",
     "affirmation": "Daily affirmations",
-    "amazingness": "These amazing things that happened today",
+    "amazingness": "3 Amazing things that happened today",
     "improvements": "How could I have made today even better",
   };
 
@@ -68,6 +72,9 @@ function renderContent(content) {
   let output = "";
 
   content.sections.forEach(section => {
+    if (section_blacklist.indexOf(section.type) !== -1)
+      return;
+
     const sectionLabel = toTitleCase(section.type);
 
     output += `# ${sectionLabel}${EOL}`;
