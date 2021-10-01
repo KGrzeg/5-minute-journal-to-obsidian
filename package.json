@@ -1,0 +1,18 @@
+{
+  "name": "5-minute-journal-to-obsidian",
+  "version": "1.0.0",
+  "description": "The app converts json files exported from Five Minute Journal to markown files, that can be read by Obsidian",
+  "main": "index.js",
+  "scripts": {
+    "start": "babel-node -- index.js"
+  },
+  "keywords": [],
+  "author": "Grzegorz Kupczyk",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/node": "^7.15.4",
+    "@babel/preset-env": "^7.15.6"
+  }
+}
