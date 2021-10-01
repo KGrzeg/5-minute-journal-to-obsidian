@@ -64,7 +64,7 @@ async function readJson(path) {
   return JSON.parse(content);
 }
 
-function renderMarkdown(content) {
+function renderContent(content) {
   let output = "";
 
   content.sections.forEach(section => {
@@ -88,9 +88,23 @@ function renderMarkdown(content) {
   return output;
 }
 
-async function processRecord(record, outputDirectory) {
+function renderMedia(media) {
+  let output = "    - Photo of the day::" + EOL;
+  const items = media
+    .filter(m => m.type == "image")
+    .map((m, i) => `![fotulka_${i + 1}](${m.file})${EOL}`);
+
+  output += renderMarkdownList(items, 3, false);
+
+  return output;
+}
+
+async function processSingleRecord(record, outputDirectory) {
   const outputPath = join(outputDirectory, `${record.date}.md`);
-  const content = renderMarkdown(record.content);
+  let content = renderContent(record.content);
+
+  if (record.media)
+    content += renderMedia(record.media);
 
   await writeFile(outputPath, content, 'utf8');
   console.log(`Write to file ${outputPath}`);
@@ -101,7 +115,7 @@ async function processData(inputFile, outputDirectory) {
   const promises = [];
 
   data.records.forEach(record => {
-    const prom = processRecord(record, outputDirectory);
+    const prom = processSingleRecord(record, outputDirectory);
     promises.push(prom);
   });
 
