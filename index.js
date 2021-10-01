@@ -81,7 +81,7 @@ function renderContent(content) {
     output += `- [[5 Minute Journal]]${EOL}`;
     output += `  - ${sectionLabel}::${EOL}`;
 
-    const itemLabels = section.items.map(item => getPharse(item.type));
+    const itemLabels = section.items.map(item => getPharse(item.type) + "::");
     const itemContents = section.items.map(item => item.content.text);
 
     output += renderMarkdownList(itemLabels, 2, false, itemIndex => {
