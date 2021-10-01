@@ -9,10 +9,14 @@ The app converts `.json` files exported from [Five Minute Journal](https://www.i
 
 ## Run
 ```sh
-🐧 mkdir -p output
-🐧 npm start # use default arguments
-🐧 npm start -- --help
+🐧 # Run with default arguments
+🐧 mkdir -p output && npm start
+
+🐧 # Run with customized arguments
 🐧 mkdir -p mymarkdowns && npm start -- -i myfile.json -o mymarkdowns
+
+🐧 # Show the help
+🐧 npm start -- --help
 ```
 
 The input is a path to the `.json` file;
